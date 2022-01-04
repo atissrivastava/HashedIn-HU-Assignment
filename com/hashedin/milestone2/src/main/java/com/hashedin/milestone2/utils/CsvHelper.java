@@ -3,6 +3,7 @@ package com.hashedin.milestone2.utils;
 import com.hashedin.milestone2.entity.Show;
 import com.hashedin.milestone2.entity.Show;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ResourceUtils;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -22,8 +23,7 @@ import java.util.stream.Collectors;
 public class CsvHelper {
 
     public static List<Show> parseCsv() throws FileNotFoundException, IOException, ParseException {
-        BufferedReader fileReader = new BufferedReader(new FileReader(String.valueOf(Paths.get(
-                "/Users/atissrivastava/HashedIn-HU-Assignment/com/hashedin/milestone1/netflix_titles.csv"))));
+        BufferedReader fileReader = new BufferedReader(new FileReader(ResourceUtils.getFile("classpath:netflix_titles.csv")));
         final String DELIMITTER = ",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)";
         List<List<String>> allShows = fileReader.lines().skip(1).map(line -> Arrays.asList(line.split(DELIMITTER, -1)))
                 .collect(Collectors.toList());
