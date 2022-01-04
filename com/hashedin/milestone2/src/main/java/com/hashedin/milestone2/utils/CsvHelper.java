@@ -34,13 +34,13 @@ public class CsvHelper {
                 String show_id = rows.get(0);
                 String type = rows.get(1);
                 String title = rows.get(2);
-                Set<String> director = new HashSet<>(Arrays.asList(rows.get(3).split(",")));
-                Set<String> cast = new HashSet<>(Arrays.asList(rows.get(4).split(",")));
-                Set<String> country = new HashSet<>(Arrays.asList(rows.get(5).split(",")));
+                String director =rows.get(3) ;// new HashSet<>(Arrays.asList(rows.get(3).split(",")));
+                String cast = rows.get(4); //new HashSet<>(Arrays.asList(rows.get(4).split(",")));
+                String country =  rows.get(5); //new HashSet<>(Arrays.asList(rows.get(5).split(",")));
                 String release_year = rows.get(7);
                 String rating = rows.get(8);
                 String duration = rows.get(9);
-                Set<String> listed_in = new HashSet<>(Arrays.asList(rows.get(10).split(",")));
+                String listed_in = rows.get(10); // new HashSet<>(Arrays.asList(rows.get(10).split(",")));
                 String description = rows.get(11);
                 DateFormat format = new SimpleDateFormat("MMMM d, yyyy");
                 Date date = format.parse("June 26, 1997");

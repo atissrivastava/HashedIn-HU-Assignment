@@ -1,24 +1,57 @@
 package com.hashedin.milestone2.entity;
 
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.Set;
 
+@Entity
+@Table(name = "show")
+@NoArgsConstructor
 public class Show {
+    @Id
+    @Column(name = "show_id")
     private String show_id;
+
+    @Column(name = "type")
     private String type;
+
+    @Column(name = "title")
     private String title;
-    private Set<String> director;
-    private Set<String> cast;
-    private Set<String> country;
+
+    @Column(name = "director")
+    private String director;
+
+    @Column(name = "casting")
+    private String cast;
+
+    @Column(name = "country")
+    private String country;
+
+    @Column(name = "date_added")
     private Date date_added;
+
+    @Column(name = "release_year")
     private String release_year;
+
+    @Column(name = "rating")
     private String rating;
+
+    @Column(name = "duration")
     private String duration;
-    private Set<String> listed_in;
+
+    @Column(name = "listed_in")
+    private String listed_in;
+
+    @Column(name = "description", columnDefinition = "text")
     private String description;
 
 
-    public Show(String show_id, String type, String title, Set<String> director, Set<String> cast, Set<String> country, Date date_added, String release_year, String rating, String duration, Set<String> listed_in, String description) {
+    public Show(String show_id, String type, String title, String director, String cast, String country, Date date_added, String release_year, String rating, String duration, String listed_in, String description) {
         this.show_id = show_id;
         this.type = type;
         this.title = title;
@@ -57,27 +90,27 @@ public class Show {
         this.title = title;
     }
 
-    public Set<String> getDirector() {
+    public String getDirector() {
         return director;
     }
 
-    public void setDirector(Set<String> director) {
+    public void setDirector(String director) {
         this.director = director;
     }
 
-    public Set<String> getCast() {
+    public String getCast() {
         return cast;
     }
 
-    public void setCast(Set<String> cast) {
+    public void setCast(String cast) {
         this.cast = cast;
     }
 
-    public Set<String> getCountry() {
+    public String getCountry() {
         return country;
     }
 
-    public void setCountry(Set<String> country) {
+    public void setCountry(String country) {
         this.country = country;
     }
 
@@ -113,11 +146,11 @@ public class Show {
         this.duration = duration;
     }
 
-    public Set<String> getListedIn() {
+    public String getListedIn() {
         return listed_in;
     }
 
-    public void setListedIn(Set<String> listed_in) {
+    public void setListedIn(String listed_in) {
         this.listed_in = listed_in;
     }
 
@@ -131,7 +164,7 @@ public class Show {
 
     @Override
     public String toString() {
-        return "Show{" + "show_id='" + show_id + '\'' + ", type='" + type + '\'' + ", title='" + title + '\'' + ", director=" + director + ", cast=" + cast + ", country=" + country + ", date_added=" + date_added + ", release_year='" + release_year + '\'' + ", rating='" + rating + '\'' + ", duration='" + duration + '\'' + ", listed_in=" + listed_in + ", description='" + description + '\''  + '}' + "\n";
+        return "Show{" + "show_id='" + show_id + '\'' + ", type='" + type + '\'' + ", title='" + title + '\'' + ", director=" + director + ", cast=" + cast + ", country=" + country + ", date_added=" + date_added + ", release_year='" + release_year + '\'' + ", rating='" + rating + '\'' + ", duration='" + duration + '\'' + ", listed_in=" + listed_in + ", description='" + description + '\'' + '}' + "\n";
     }
 
 }
