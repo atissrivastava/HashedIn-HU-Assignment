@@ -8,10 +8,10 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
-
-import com.hashedin.milestone2.entity.Show;
+import com.hashedin.milestone2.entity.Show ;
 import com.hashedin.milestone2.service.ShowService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,11 +32,11 @@ public class ShowController {
         return shows;
     }
 
-    @GetMapping(value = "/tvshows", params = "ShowType")
-    public static List<Show> getHorrorShow(@RequestParam String ShowType, HttpServletResponse response) throws FileNotFoundException, IOException, ParseException {
+    @GetMapping(value = "/tvshows", params = "movieType")
+    public static List<Show> getHorrorShow(@RequestParam String movieType, HttpServletResponse response) throws FileNotFoundException, IOException, ParseException {
         long executionStartTime = System.currentTimeMillis();
         List<Show> horrorMovies = new ArrayList<>();
-        horrorMovies = showService.getFirstNIndianMovies(ShowType);
+        horrorMovies = showService.getFirstNListedHorrorMovies(movieType);
         long executionEndTime = System.currentTimeMillis();
         response.setHeader("X-TIME-TO-EXECUTE", (executionEndTime - executionStartTime) + "ms");
         return horrorMovies;
@@ -57,7 +57,7 @@ public class ShowController {
     public static List<Show> getDateBasedShow(@RequestParam Date startDate, Date endDate, HttpServletResponse response) throws FileNotFoundException, IOException, ParseException {
         long executionStartTime = System.currentTimeMillis();
         List<Show> shows = new ArrayList<>();
-        shows = showService.filterShow(startDate, endDate);
+        shows = showService.filterShowWithDate(startDate, endDate);
         long executionEndTime = System.currentTimeMillis();
         response.setHeader("X-TIME-TO-EXECUTE", (executionEndTime - executionStartTime) + "ms");
         return shows;

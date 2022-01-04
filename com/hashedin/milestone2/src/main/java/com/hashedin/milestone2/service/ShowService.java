@@ -11,51 +11,42 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.hashedin.milestone2.entity.Show;
-import com.hashedin.milestone2.utils.CsvHelper;
+import  com.hashedin.milestone2.utils.CsvHelper ;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ShowService {
 
-
-    public List<Show> showAll() throws IOException, ParseException {
-        List<Show> result = new ArrayList<>();
-        result = CsvHelper.parseCsv();
-        return result;
-    }
-
-
     public static List<Show> getFirstNTvShows(int count) throws FileNotFoundException, IOException, ParseException {
-        List<Show> Show = new ArrayList<>();
-        Show = CsvHelper.parseCsv();
-        List<Show> result = new ArrayList<>();
-        result = Show.stream().filter(m -> m.getDate_added() != null).filter(m -> m.getType().equals("TV Show")).limit(count).collect(Collectors.toList());
-        return result;
+        List<Show> shows = new ArrayList<>();
+        shows = CsvHelper.parseCsv();
+        List<Show> resultSet = new ArrayList<>();
+        resultSet = shows.stream().filter(row -> row.getDateAdded() != null).filter(row -> row.getType().equals("TV Show")).limit(count).collect(Collectors.toList());
+        return resultSet;
     }
 
-
-    public static List<Show> getFirstNListedHorrorMovies(String ShowType) throws FileNotFoundException, IOException, ParseException {
-        List<Show> Show = new ArrayList<>();
-        Show = CsvHelper.parseCsv();
-        List<Show> result = new ArrayList<>();
-        result = Show.stream().filter(m -> m.getDate_added() != null).filter(m -> m.getListed_in().contains(ShowType)).collect(Collectors.toList());
-        return result;
+    public static List<Show> getFirstNListedHorrorMovies(String movieType) throws FileNotFoundException, IOException, ParseException {
+        List<Show> shows = new ArrayList<>();
+        shows = CsvHelper.parseCsv();
+        List<Show> resultSet = new ArrayList<>();
+        resultSet = shows.stream().filter(row -> row.getDateAdded() != null).filter(row -> row.getListedIn().contains(movieType)).collect(Collectors.toList());
+        return resultSet;
     }
 
     public static List<Show> getFirstNIndianMovies(String country) throws FileNotFoundException, IOException, ParseException {
-        List<Show> Show = new ArrayList<>();
-        Show = CsvHelper.parseCsv();
-        List<Show> result = new ArrayList<>();
-        result = Show.stream().filter(m -> m.getDate_added() != null).filter(m -> m.getCountry().contains(country)).collect(Collectors.toList());
-        return result;
+        List<Show> shows = new ArrayList<>();
+        shows = CsvHelper.parseCsv();
+        List<Show> resultSet = new ArrayList<>();
+        resultSet = shows.stream().filter(row -> row.getDateAdded() != null).filter(row -> row.getCountry().contains(country)).collect(Collectors.toList());
+        return resultSet;
     }
 
-    public static List<Show> filterShow(Date startDate, Date endDate) throws FileNotFoundException, IOException, ParseException {
-        List<Show> Show = new ArrayList<>();
-        Show = CsvHelper.parseCsv();
-        List<Show> result = new ArrayList<>();
-        result = Show.stream().filter(m -> m.getDate_added() != null).filter(m -> m.getDate_added().after(startDate) && m.getDate_added().before(endDate)).collect(Collectors.toList());
-        return result;
+    public static List<Show> filterShowWithDate(Date startDate, Date endDate) throws FileNotFoundException, IOException, ParseException {
+        List<Show> shows = new ArrayList<>();
+        shows = CsvHelper.parseCsv();
+        List<Show> resultSet = new ArrayList<>();
+        resultSet = shows.stream().filter(row -> row.getDateAdded() != null).filter(row -> row.getDateAdded().after(startDate) && row.getDateAdded().before(endDate)).collect(Collectors.toList());
+        return resultSet;
     }
 }
 
