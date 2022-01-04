@@ -10,19 +10,6 @@ public class Show {
     private Set<String> director;
     private Set<String> cast;
 
-    @Override
-    public String toString() {
-        return "Show{" + "show_id='" + show_id + '\'' + ", type='" + type + '\'' + ", title='" + title + '\'' + ", director=" + director + ", cast=" + cast + ", country=" + country + ", date_added=" + date_added + ", release_year='" + release_year + '\'' + ", rating='" + rating + '\'' + ", duration='" + duration + '\'' + ", listed_in=" + listed_in + ", description='" + description + '\'' + '}';
-    }
-
-    private Set<String> country;
-    private Date date_added;
-    private String release_year;
-    private String rating;
-    private String duration;
-    private Set<String> listed_in;
-    private String description;
-
     public Show(String show_id, String type, String title, Set<String> director, Set<String> cast, Set<String> country, Date date_added, String release_year, String rating, String duration, Set<String> listed_in, String description) {
         this.show_id = show_id;
         this.type = type;
@@ -133,4 +120,18 @@ public class Show {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "Show{" + "show_id='" + show_id + '\'' + ", type='" + type + '\'' + ", title='" + title + '\'' + ", director=" + director + ", cast=" + cast + ", country=" + country + ", date_added=" + date_added + ", release_year='" + release_year + '\'' + ", rating='" + rating + '\'' + ", duration='" + duration + '\'' + ", listed_in=" + listed_in + ", description='" + description + '\''  + '}' + "\n";
+    }
+
+    private Set<String> country;
+    private Date date_added;
+    private String release_year;
+    private String rating;
+    private String duration;
+    private Set<String> listed_in;
+    private String description;
+
 }

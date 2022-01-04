@@ -1,5 +1,7 @@
 package com.hashedin.milestone1.service;
 
+import com.hashedin.milestone1.entity.Show;
+
 import java.io.BufferedReader;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -7,35 +9,34 @@ import java.util.stream.Collectors;
 public class ShowService {
     private final static String DELIMITTER = ",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)";
 
-    public static void getFirstNTvShows(BufferedReader br, int n, Date startDate, Date endDate) {
+    public static void getFirstNTvShows(List<Show> show, int n, Date startDate, Date endDate) {
         long executionStartTime = System.currentTimeMillis();
-        List<String> columns = br.lines().findFirst().map(line -> Arrays.asList(line.split(","))).get();
-        int indexOfColumnType = columns.indexOf("type");
-        List<List<String>> rows = br.lines().map(line -> Arrays.asList(line.split(DELIMITTER))).filter(list -> list.get(indexOfColumnType).equalsIgnoreCase("tv show")).limit(n).collect(Collectors.toList());
-        display(rows);
+        show.stream().filter(m -> m.getDate_added() != null)
+                .filter(m -> m.getType().equals("TV Show")).limit(n)
+                .filter(m -> m.getDate_added().after(startDate) && m.getDate_added().before(endDate))
+                .forEach(System.out::println);
         long executionFinishTime = System.currentTimeMillis();
         System.out.println("Execution Time: " + (executionFinishTime - executionStartTime) + " ms");
     }
 
 
-    public static void getFirstNListedHorrorMovies(BufferedReader br, int n, Date startDate, Date endDate) {
+    public static void getFirstNListedHorrorMovies(List<Show> show, int n, Date startDate, Date endDate) {
         long executionStartTime = System.currentTimeMillis();
-        List<String> columns = br.lines().findFirst().map(line -> Arrays.asList(line.split(","))).get();
-        int indexOfColumnType = columns.indexOf("listed_in");
-        List<List<String>> rows = br.lines().map(line -> Arrays.asList(line.split(DELIMITTER))).filter(list -> list.size() >= indexOfColumnType && list.get(indexOfColumnType).contains("Horror Movies")).limit(n).collect(Collectors.toList());
-        display(rows);
+        show.stream().filter(m -> m.getDate_added() != null)
+                .filter(m -> m.getListed_in().contains("Horror Movies")).limit(n)
+                .filter(m -> m.getDate_added().after(startDate) && m.getDate_added().before(endDate))
+                .forEach(System.out::println);
         long executionFinishTime = System.currentTimeMillis();
         System.out.println("Execution Time: " + (executionFinishTime - executionStartTime) + " ms");
     }
 
-    public static void getFirstNIndianMovies(BufferedReader br, int n, Date startDate, Date endDate) {
+    public static void getFirstNIndianMovies(List<Show> show, int n, Date startDate, Date endDate) {
         long executionStartTime = System.currentTimeMillis();
-        List<String> columns = br.lines().findFirst().map(line -> Arrays.asList(line.split(DELIMITTER))).get();
-        int indexOfColumnType = columns.indexOf("type");
-        int indexOfColumnCountry = columns.indexOf("country");
-
-        List<List<String>> rows = br.lines().map(line -> Arrays.asList(line.split(DELIMITTER, -1))).filter(list -> list.size() > 1 && list.get(indexOfColumnType).trim().equalsIgnoreCase("MOVIE") && list.get(indexOfColumnCountry).trim().equalsIgnoreCase("INDIA")).limit(n).collect(Collectors.toList());
-        display(rows);
+        show.stream().filter(m -> m.getDate_added() != null)
+                .filter(m -> m.getType().equals("Movie") && m.getCountry().contains("India"))
+                .limit(n)
+                .filter(m -> m.getDate_added().after(startDate) && m.getDate_added().before(endDate))
+                .forEach(System.out::println);
         long executionFinishTime = System.currentTimeMillis();
         System.out.println("Execution Time: " + (executionFinishTime - executionStartTime) + " ms");
     }
