@@ -41,15 +41,13 @@ public class CsvHelper {
                 Set<String> listed_in = new HashSet<>(Arrays.asList(rows.get(10).split(",")));
                 String description = rows.get(11);
                 DateFormat format = new SimpleDateFormat("MMMM d, yyyy");
-//                String dateToParse = rows.get(6).isEmpty() ? "" : rows.get(6).trim();
                 Date date = format.parse("June 26, 1997");
-//                if(!dateToParse.isEmpty()) date = format.parse(dateToParse);
-//                try {
-//                    date = !rows.get(6).isEmpty() ? format.parse(rows.get(6).trim()) : null;
-//                } catch (Exception e) {
-//                    System.out.println("Exception occured for row number :" + show_id);
-//                date = format.parse("June 26, 1997");
-//                }
+                try {
+                    date = !rows.get(6).isEmpty() ? format.parse(rows.get(6).replaceAll("\"", "").trim()) : null;
+                } catch (Exception e) {
+                    System.out.println("Exception occured for row number :" + show_id);
+                    date = format.parse("June 26, 1997");
+                }
                 Show Show = new Show(show_id, type, title, director, cast, country, date, release_year, rating, duration, listed_in, description);
                 showList.add(Show);
             }
