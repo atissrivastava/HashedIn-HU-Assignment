@@ -1,7 +1,7 @@
 package com.hashedin.milestone2.controller;
 
 import com.hashedin.milestone2.entity.Show;
-import com.hashedin.milestone2.service.CsvWriter;
+import com.hashedin.milestone2.service.CsvWriterService;
 import com.hashedin.milestone2.service.ShowDbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,7 @@ public class DbController {
     @Autowired
     private ShowDbService showDbService;
     @Autowired
-    private CsvWriter csvWriter;
+    private CsvWriterService csvWriterService;
 
     // API to add data from CSV to DB
     @GetMapping(value ="/csv-to-db")
@@ -30,13 +30,12 @@ public class DbController {
     }
 
     // API to add new Data to CSV or DB
-    @PostMapping(value = "/add-show", params = "dataSource")
-    public void addNewShow(@RequestParam String dataSource, @RequestBody Show show, HttpServletResponse response) throws IOException {
+    @PostMapping(value = "/add-show", params = "dataDestination")
+    public void addNewShow(@RequestParam String dataDestination, @RequestBody Show show, HttpServletResponse response) throws IOException {
 
-        if (dataSource.equals("db")) showDbService.saveShowToDb(show);
-        else if (dataSource.equals("csv")) {
-            csvWriter.writeToCSV(show);
-            showDbService.saveShowToDb(show);
+        if (dataDestination.equals("db")) showDbService.saveShowToDb(show);
+        else if (dataDestination.equals("csv")) {
+            csvWriterService.writeToCSV(show);
         }
     }
 }

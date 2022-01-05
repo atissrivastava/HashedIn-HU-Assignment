@@ -10,41 +10,41 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = "show")
+@Table(name = "show_db")
 @NoArgsConstructor
 public class Show {
     @Id
-    @Column(name = "show_id")
+    @Column(name = "show_id", length = 10)
     private String show_id;
 
-    @Column(name = "type")
+    @Column(name = "show_type", length = 20)
     private String type;
 
     @Column(name = "title")
     private String title;
 
-    @Column(name = "director")
+    @Column(name = "director", columnDefinition = "text")
     private String director;
 
-    @Column(name = "casting")
+    @Column(name = "casting", columnDefinition = "text")
     private String cast;
 
-    @Column(name = "country")
+    @Column(name = "country", columnDefinition = "text")
     private String country;
 
-    @Column(name = "date_added")
+    @Column(name = "date_added", length = 20)
     private Date date_added;
 
-    @Column(name = "release_year")
+    @Column(name = "release_year", length = 20)
     private String release_year;
 
-    @Column(name = "rating")
+    @Column(name = "rating", length = 20)
     private String rating;
 
-    @Column(name = "duration")
+    @Column(name = "duration", length = 20)
     private String duration;
 
-    @Column(name = "listed_in")
+    @Column(name = "listed_in", columnDefinition = "text")
     private String listed_in;
 
     @Column(name = "description", columnDefinition = "text")
