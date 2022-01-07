@@ -2,6 +2,7 @@ package com.hashedin.milestone1.utils;
 
 import com.hashedin.milestone1.entity.Show;
 
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DateFormat;
@@ -9,19 +10,21 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.stream.Collectors;
 
 
 public class CsvHelper {
 
     public static List<Show> parseCsv() throws FileNotFoundException, IOException, ParseException {
+//        InputStream inputStream =
+//                CsvHelper.class.getClassLoader().getResourceAsStream("netflix_titles.csv");
+//        BufferedReader fileReader = new BufferedReader(new InputStreamReader(inputStream ));
+        System.out.println(CsvHelper.class.get);
+
+//        BufferedReader fileReader = new BufferedReader(new FileReader(CsvHelper.class.getClassLoader().getResource("netflix_titles.csv").getFile()));
         BufferedReader fileReader = new BufferedReader(new FileReader(String.valueOf(Paths.get(
                 "/Users/atissrivastava/HashedIn-HU-Assignment/com/hashedin/milestone1/netflix_titles.csv"))));
+
         final String DELIMITTER = ",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)";
         List<List<String>> allShows = fileReader.lines().skip(1).map(line -> Arrays.asList(line.split(DELIMITTER, -1)))
                 .collect(Collectors.toList());
